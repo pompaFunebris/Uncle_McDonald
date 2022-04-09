@@ -16,9 +16,16 @@ void fence(){
     }
 
     if(user_command.compare("RUN") == 0){
-        int length;
+        int length = 0;
         cout << "Provide length of fence: ";
         cin >> length;
+
+        while( length < 3 || cin.fail()) {
+            cout << "Your fence length must be >=3 integer, provide valid number: ";
+            cin.clear();
+            std::cin.ignore(256,'\n');
+            cin >> length;
+        };
 
         if(length >= 3){
             Fence_sides fence_sides = optimization(length);
@@ -30,9 +37,6 @@ void fence(){
 
             int area_value = area(a, b);
             cout << "\n area = " << area_value;
-        } else {
-            cout << "Your fence must be longer, provide valid number\n" << endl;
-            fence();
         }
     } else if(user_command.compare("EXIT") == 0){
         cout << "You decided to close the program" << endl;
